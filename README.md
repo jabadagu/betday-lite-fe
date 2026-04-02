@@ -1,29 +1,127 @@
 # BetDay Lite
 
-Mini app web para visualizar eventos deportivos del dia en un timeline por horas, simular apuestas de mercado 1X2 y revisar apuestas en una seccion de perfil protegida.
+Mini app web en Next.js para visualizar eventos deportivos del dia, seleccionar cuotas 1X2 y gestionar apuestas desde una betslip con autenticacion.
+
+## Que incluye la app hoy
+
+- Home publica (`/`) con timeline diario por horas y ligas.
+- Seleccion de cuotas `1`, `X`, `2` para crear apuestas simples o multiples.
+- Betslip responsive (sidebar en desktop + modal/fab en mobile).
+- Autenticacion con NextAuth (credenciales demo).
+- Perfil protegido (`/profile`) con resumen y listado de apuestas del usuario.
+- Detalle protegido de apuesta en `/bets/[betId]`.
+- API Routes para eventos y apuestas (`/api/events`, `/api/bets`, `/api/bets/[betId]`).
+- Integracion con Supabase para persistencia de apuestas.
+- SEO tecnico en rutas publicas (metadata, Open Graph, JSON-LD, robots y sitemap).
 
 ## Stack
 
-- Next.js 15 (App Router)
-- React 18
+- Next.js 16.2.1 (App Router)
+- React 19
 - TypeScript
-- NextAuth
-- Tailwind CSS
+- NextAuth 4
+- Tailwind CSS 4
+- TanStack Query
 - Framer Motion
 - Zod
+- Zustand
+- Supabase
 
-## Funcionalidades implementadas
+## Requisitos
 
-- Home en `/` con timeline diario por horas.
-- Eventos con liga, equipos y cuotas 1X2.
-- Simulacion de apuesta al hacer click en `1`, `X` o `2`.
-- Feedback visual inmediato con toast animado.
-- Perfil en `/profile` protegido con NextAuth.
-- Perfil mostrando solo apuestas del usuario autenticado.
-- Empty state para usuarios sin apuestas.
-- Detalle de apuesta en `/bets/[betId]`.
-- API Routes para eventos y apuestas.
-- Server Components + fetch desde API Routes + loading UI.
+- Node.js 20+
+- npm 10+
+- Proyecto/configuracion de Supabase con tabla `bets`
+
+## Variables de entorno
+
+Crea un archivo `.env.local` en la raiz con estas variables:
+
+```bash
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=betday-lite-local-secret
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...
+# alternativa opcional si no usas la variable anterior:
+# NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+
+SUPABASE_SERVICE_ROLE_KEY=...
+```
+
+Notas:
+- `NEXTAUTH_SECRET` y `NEXTAUTH_URL` son necesarios para auth y middleware.
+- La app usa cliente de Supabase del lado servidor para crear/listar apuestas.
+- Si defines ambas (`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`), se prioriza `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY`.
+
+## Arranque local
+
+1. Instalar dependencias.
+
+```bash
+npm install
+```
+
+2. Crear y completar `.env.local` con las variables del bloque anterior.
+
+3. Levantar en desarrollo.
+
+```bash
+npm run dev
+```
+
+4. Abrir `http://localhost:3000`.
+
+## Credenciales demo
+
+Ingresa manualmente en `/login`:
+
+- `ana@betday.dev / betday123`
+- `jose@betday.dev / betday123`
+
+## Scripts disponibles
+
+- `npm run dev`: inicia modo desarrollo.
+- `npm run build`: genera build de produccion.
+- `npm run start`: sirve el build de produccion.
+- `npm run lint`: ejecuta ESLint.
+- `npm run typecheck`: ejecuta TypeScript sin emitir.
+- `npm run test`: actualmente corre `typecheck`.
+- `npm run format`: formatea codigo con Prettier.
+- `npm run format:check`: valida formato sin escribir cambios.
+
+## Flujo rapido para probar
+
+1. Abre la home y selecciona una o varias cuotas.
+2. Revisa la betslip (desktop lateral o mobile con FAB).
+3. Inicia sesion en `/login` con las credenciales demo.
+4. Confirma la apuesta y revisa resultado en `/profile`.
+5. Entra al detalle desde la lista para validar `/bets/[betId]`.
+
+## Rutas principales
+
+- Publicas:
+  - `/`
+  - `/login`
+- Privadas (middleware + session check):
+  - `/profile`
+  - `/bets/[betId]`
+- API:
+  - `/api/events`
+  - `/api/bets`
+  - `/api/bets/[betId]`
+
+## Notas tecnicas
+
+- La proteccion de rutas se define en `middleware.ts` con matcher para `/profile/*` y `/bets/*`.
+- El servicio de apuestas (`src/services/bets.service.ts`) es server-only.
+- La home usa datos mock (`src/data/mock-events.ts`) para eventos.
+- Las apuestas se persisten en Supabase.
+- En SEO:
+  - la home incluye metadata + canonical + JSON-LD,
+  - `robots.ts` permite indexar publico y bloquea `/profile`, `/bets` y `/api`,
+  - `sitemap.ts` expone rutas publicas indexables.
 
 ## Estructura principal
 
@@ -38,91 +136,45 @@ src/
 		bets/[betId]/page.tsx
 		login/page.tsx
 		profile/page.tsx
-		profile/loading.tsx
-		loading.tsx
 		layout.tsx
 		page.tsx
+		robots.ts
+		sitemap.ts
 	components/
-		auth-actions.tsx
-		bet-list.tsx
-		login-form.tsx
-		providers.tsx
-		timeline-client.tsx
+		bets/
+		betslip/
+		layout/
+		timeline/
+		ui/
+	config/
+		env.ts
+	data/
+		mock-events.ts
 	lib/
 		auth.ts
-		bet-store.ts
-		mock-events.ts
+		schemas.ts
+		seo.ts
 		server-url.ts
+	providers/
+		index.tsx
+	services/
+		bets.service.ts
+		betslip-api.service.ts
+	store/
+		betslip-store.ts
+		ui-state-store.ts
+	supabase/
+		index.ts
 	types/
 		bet.ts
 		event.ts
 		next-auth.d.ts
 ```
 
-## Ejecutar en local
-
-1. Instalar dependencias:
-
-```bash
-npm install
-```
-
-2. Crear variables de entorno desde `.env.example`:
-
-```bash
-cp .env.example .env.local
-```
-
-3. Ejecutar app:
-
-```bash
-npm run dev
-```
-
-4. Abrir `http://localhost:3000`.
-
-## Credenciales demo
-
-Las credenciales no se autocompletan en el formulario de login; ingresalas manualmente.
-
-- `ana@betday.dev / betday123`
-- `carlos@betday.dev / betday123`
-
-## Scripts
-
-- `npm run dev` inicia modo desarrollo.
-- `npm run lint` ejecuta eslint.
-- `npm run build` genera build de produccion.
-- `npm run start` levanta el build de produccion.
-
-## Notas tecnicas
-
-- Se usa `middleware.ts` para proteger `/profile` y `/bets/*`.
-- La persistencia de apuestas es en memoria (demo técnica), aislada por usuario autenticado.
-- Para una version productiva, se recomienda reemplazar el store por base de datos (Prisma + Postgres).
-
-## Deploy en Vercel
+## Deploy (Vercel)
 
 1. Importar el repo en Vercel.
-2. Configurar variables:
-	- `NEXTAUTH_URL`
-	- `NEXTAUTH_SECRET`
-	- `NEXT_PUBLIC_APP_URL`
-	- `NEXT_PUBLIC_SUPABASE_URL`
-	- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY`
-	- `SUPABASE_SERVICE_ROLE_KEY`
-3. Deploy.
+2. Configurar las mismas variables de entorno del entorno local.
+3. Ejecutar deploy.
 
-## Auth y datos
-
-- El login actual usa credenciales demo con NextAuth.
-- Existe un helper de Supabase listo en `src/lib/supabase.ts` para conectar capas de datos o persistencia.
-- Las apuestas en curso muestran la hora del partido en cards y detalle.
-
-## Supabase
-
-El esquema inicial para persistir apuestas está en `supabase/migrations/0001_create_bets.sql`.
-
-## Documento de plan
-
-El plan de implementacion del reto se encuentra en `docs/implementation-plan.md`.
+Recomendacion: usa valores de `NEXTAUTH_URL` y `NEXT_PUBLIC_APP_URL` con la URL final de produccion.

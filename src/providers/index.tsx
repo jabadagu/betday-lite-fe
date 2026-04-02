@@ -9,7 +9,7 @@ type Props = {
   children: ReactNode;
 };
 
-export function Providers({ children }: Props) {
+export function LayoutProviders({ children }: Props) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -25,13 +25,12 @@ export function Providers({ children }: Props) {
   return (
     <SessionProvider>
       <ThemeProvider
-        attribute='class'
-        defaultTheme='light'
+        attribute="class"
+        defaultTheme="light"
         enableSystem={false}
-        disableTransitionOnChange>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        disableTransitionOnChange
+      >
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       </ThemeProvider>
     </SessionProvider>
   );

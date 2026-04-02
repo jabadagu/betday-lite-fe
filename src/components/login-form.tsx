@@ -7,11 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-import { loginSchema } from "@/lib/schemas";
-import { Box } from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Typography } from "@/components/ui/typography";
+import { loginSchema } from "@betday/lib";
+import { Box, Button, Input, Typography } from "@betday/components/ui";
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 

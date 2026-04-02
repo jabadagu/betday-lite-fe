@@ -1,9 +1,19 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import { LoginForm } from "@/components/login-form";
-import { Typography } from "@/components/ui/typography";
-import { authOptions } from "@/lib/auth";
+import { LoginForm } from "@betday/components/login-form";
+import { Typography } from "@betday/components/ui";
+import { authOptions } from "@betday/lib/auth";
+
+export const metadata: Metadata = {
+  title: "Iniciar sesion | BetDay",
+  description: "Accede a BetDay para continuar con tu experiencia.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function LoginPage() {
   const session = await getServerSession(authOptions);

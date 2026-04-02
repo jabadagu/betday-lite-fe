@@ -1,5 +1,4 @@
-import type { Bet } from "@/types/bet";
-import { BetSelection } from "@/types/enums";
+import { BetSelection, type Bet } from "@betday/types";
 
 /**
  * Fetch all bets for the current user
@@ -17,11 +16,7 @@ export const fetchBets = async (): Promise<Bet[]> => {
 /**
  * Create a simple bet (single selection)
  */
-export const postSimpleBet = async (
-  eventId: string,
-  selection: BetSelection,
-  stake: number,
-) => {
+export const postSimpleBet = async (eventId: string, selection: BetSelection, stake: number) => {
   const response = await fetch("/api/bets", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -1,15 +1,12 @@
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-import { authOptions } from "@/lib/auth";
-import { getBetById } from "@/services/bets.service";
+import { authOptions } from "@betday/lib/auth";
+import { getBetById } from "@betday/services/bets.service";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ betId: string }> },
-) {
+export async function GET(_request: Request, { params }: { params: Promise<{ betId: string }> }) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {

@@ -1,9 +1,8 @@
 "use client";
 
-import { dictionary } from "@/lib/i18n";
-import { Chip } from "@/components/ui/chip";
-import { Box } from "@/components/ui/box";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
+import { dictionary } from "@betday/lib";
+import { Chip, Box } from "@betday/components/ui";
+import { useUIStateStore } from "@betday/store";
 
 const FILTERS = [
   { key: "all", labelKey: "all" as const },
@@ -19,12 +18,9 @@ export function LeagueFilters() {
   const copy = dictionary[locale];
 
   return (
-    <Box className='flex gap-2 overflow-x-auto pb-1 hide-scrollbar'>
+    <Box className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
       {FILTERS.map((f) => (
-        <Chip
-          key={f.key}
-          active={activeFilter === f.key}
-          onClick={() => setActiveFilter(f.key)}>
+        <Chip key={f.key} active={activeFilter === f.key} onClick={() => setActiveFilter(f.key)}>
           {copy[f.labelKey]}
         </Chip>
       ))}

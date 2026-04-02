@@ -1,33 +1,13 @@
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { z } from "zod";
 
-import { authOptions } from "@/lib/auth";
-import { createSimpleBet, createMultipleBet, getBetsByUser } from "@/services/bets.service";
-import { BetSelection } from "@/types/enums";
-
-const simpleBetSchema = z.object({
-  type: z.literal("simple"),
-  eventId: z.string().min(1),
-  selection: z.enum([BetSelection.HOME, BetSelection.DRAW, BetSelection.AWAY]),
-  stake: z.number().min(1),
-});
-
-const multipleBetSchema = z.object({
-  type: z.literal("multiple"),
-  selections: z.array(
-    z.object({
-      eventId: z.string().min(1),
-      selection: z.enum([BetSelection.HOME, BetSelection.DRAW, BetSelection.AWAY]),
-    }),
-  ).min(2),
-  stake: z.number().min(1),
-});
-
-const createBetSchema = z.union([simpleBetSchema, multipleBetSchema]);
+import { authOptions } from "@betday/lib/auth";
+import { createSimpleBet, createMultipleBet, getBetsByUser } from "@betday/services/bets.service";
+import { createBetSchema } from "@betday/lib";
 
 export const dynamic = "force-dynamic";
 
+/* Get all bets for the authenticated user */
 export async function GET() {
   const session = await getServerSession(authOptions);
 
@@ -39,6 +19,7 @@ export async function GET() {
   return NextResponse.json({ bets });
 }
 
+/* Create a new bet */
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
 
@@ -70,10 +51,7 @@ export async function POST(request: Request) {
     }
 
     if (error instanceof Error && error.message.startsWith("SUPABASE_")) {
-      return NextResponse.json(
-        { message: error.message },
-        { status: 500 },
-      );
+      return NextResponse.json({ message: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ message: "Unexpected error" }, { status: 500 });

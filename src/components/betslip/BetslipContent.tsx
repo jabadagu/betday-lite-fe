@@ -5,16 +5,10 @@ import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect } from "react";
-import { dictionary, t } from "@/lib/i18n";
-import { formatMatchTime } from "@/lib/time";
-import { placeBetSchema } from "@/lib/schemas";
-import { Box } from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Typography } from "@/components/ui/typography";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
-import { useBetslipStore } from "@/lib/stores/betslip-store";
-import { postSimpleBet, postMultipleBet } from "@/services/betslip-api.service";
+import { dictionary, t, formatMatchTime, placeBetSchema } from "@betday/lib";
+import { Box, Button, Input, Typography } from "@betday/components/ui";
+import { useUIStateStore, useBetslipStore } from "@betday/store";
+import { postSimpleBet, postMultipleBet } from "@betday/services/betslip-api.service";
 
 export function BetslipContent() {
   const { data: session } = useSession();

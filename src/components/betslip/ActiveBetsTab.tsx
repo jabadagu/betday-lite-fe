@@ -3,11 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { Clock } from "lucide-react";
-import { dictionary } from "@/lib/i18n";
-import { Box } from "@/components/ui/box";
-import { Typography } from "@/components/ui/typography";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
-import { fetchBets } from "@/services/betslip-api.service";
+import { dictionary } from "@betday/lib";
+import { Box, Typography } from "@betday/components/ui";
+import { useUIStateStore } from "@betday/store";
+import { fetchBets } from "@betday/services/betslip-api.service";
 import { ConfirmedBetCard } from "./ConfirmedBetCard";
 
 export function ActiveBetsTab() {

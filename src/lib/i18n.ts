@@ -1,4 +1,4 @@
-import { Locale } from "@/types/enums";
+import { Locale } from "@betday/types";
 
 export type { Locale };
 

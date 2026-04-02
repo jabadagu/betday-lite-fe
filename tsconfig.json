@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,9 +19,22 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@betday/lib": ["./src/lib/index.ts"],
+      "@betday/components/*": ["./src/components/*"],
+      "@betday/lib/*": ["./src/lib/*"],
+      "@betday/services": ["./src/services/index.ts"],
+      "@betday/services/*": ["./src/services/*"],
+      "@betday/types": ["./src/types/index.ts"],
+      "@betday/types/*": ["./src/types/*"],
+      "@betday/store": ["./src/store/index.ts"],
+      "@betday/store/*": ["./src/store/*"],
+      "@betday/supabase": ["./src/supabase/index.ts"],
+      "@betday/supabase/*": ["./src/supabase/*"],
+      "@betday/config": ["./src/config/env.ts"],
+      "@betday/config/*": ["./src/config/*"],
+      "@betday/providers": ["./src/providers/index.tsx"],
+      "@betday/providers/*": ["./src/providers/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": [
@@ -36,7 +45,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

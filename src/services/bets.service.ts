@@ -3,10 +3,8 @@ import "server-only";
 import { randomUUID } from "crypto";
 
 import { eventById } from "@/data/mock-events";
-import { createSupabaseServerClient } from "@/lib/supabase";
-import type { Bet, BetLeg } from "@/types/bet";
-import { BetSelection } from "@/types/enums";
-import { BetStatus, BetType } from "@/types/enums";
+import { createSupabaseServerClient } from "../supabase";
+import { BetSelection, BetStatus, BetType, type Bet, type BetLeg } from "@betday/types";
 
 type BetRow = {
   id: string;
@@ -80,7 +78,6 @@ const selectBetsByUser = async (userId: string) => {
 
   return (data ?? []).map((row) => toBet(row as BetRow));
 };
-
 
 export const getBetsByUser = async (userId: string) => {
   return selectBetsByUser(userId);
@@ -173,8 +170,4 @@ export const createMultipleBet = async (
 
   await insertBet(newBet);
   return newBet;
-};
-
-const createBet = async (userId: string, eventId: string, selection: BetSelection) => {
-  return createSimpleBet(userId, eventId, selection, 10);
 };

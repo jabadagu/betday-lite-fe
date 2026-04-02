@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/cn";
+import { cn } from "@betday/lib";
 
 const typographyVariants = cva("text-secondary", {
   variants: {
@@ -12,8 +12,7 @@ const typographyVariants = cva("text-secondary", {
       body1: "text-base text-secondary md:text-lg",
       body2: "text-sm text-secondary md:text-base",
       body3: "text-xs text-tertiary md:text-sm",
-      eyebrow:
-        "text-[0.65rem] font-bold uppercase tracking-[0.16em] text-brand",
+      eyebrow: "text-[0.65rem] font-bold uppercase tracking-[0.16em] text-brand",
     },
   },
   defaultVariants: {
@@ -23,10 +22,7 @@ const typographyVariants = cva("text-secondary", {
 
 interface TypographyProps
   extends
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement
-    >,
+    React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>,
     VariantProps<typeof typographyVariants> {
   component?: React.ElementType;
   variant?: keyof typeof elementMapping;
@@ -45,23 +41,19 @@ const elementMapping = {
 
 type ComponentElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 
-const Typography = React.forwardRef<
-  HTMLHeadingElement | HTMLParagraphElement,
-  TypographyProps
->(({ component, className, variant, children, ...props }, ref) => {
-  const Comp = (
-    component ? component : variant ? elementMapping[variant] : "p"
-  ) as ComponentElement;
+const Typography = React.forwardRef<HTMLHeadingElement | HTMLParagraphElement, TypographyProps>(
+  ({ component, className, variant, children, ...props }, ref) => {
+    const Comp = (
+      component ? component : variant ? elementMapping[variant] : "p"
+    ) as ComponentElement;
 
-  return (
-    <Comp
-      className={cn(typographyVariants({ variant }), className)}
-      ref={ref}
-      {...props}>
-      {children}
-    </Comp>
-  );
-});
+    return (
+      <Comp className={cn(typographyVariants({ variant }), className)} ref={ref} {...props}>
+        {children}
+      </Comp>
+    );
+  },
+);
 
 Typography.displayName = "Typography";
 

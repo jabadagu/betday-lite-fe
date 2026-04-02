@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { cn } from "@/lib/cn";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
+import { cn } from "@betday/lib";
+import { useUIStateStore } from "@betday/store";
 
 const typeStyles = {
   success: "bg-status-success text-inverse",
@@ -25,7 +25,8 @@ export function Toast() {
           className={cn(
             "fixed right-4 top-20 z-[60] rounded-radius-lg px-4 py-2.5 text-sm font-semibold shadow-lg",
             typeStyles[notice.type],
-          )}>
+          )}
+        >
           {notice.message}
         </motion.div>
       )}

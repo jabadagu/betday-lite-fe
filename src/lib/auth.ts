@@ -1,6 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { ENV } from "@/config/env";
+import { ENV } from "@betday/config/env";
 
 export const demoUsers = [
   {
@@ -35,8 +35,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         const foundUser = demoUsers.find(
-          (user) =>
-            user.email === credentials.email && user.password === credentials.password,
+          (user) => user.email === credentials.email && user.password === credentials.password,
         );
 
         if (!foundUser) {

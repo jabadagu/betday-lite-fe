@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@betday/lib";
 
 interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: React.ElementType;

@@ -4,14 +4,11 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { User, LogOut, Ticket, ClipboardList } from "lucide-react";
+import { User, LogOut } from "lucide-react";
 
-import { dictionary } from "@/lib/i18n";
-import { Box } from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
-import { Typography } from "@/components/ui/typography";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
-import { useBetslipStore } from "@/lib/stores/betslip-store";
+import { Box, Button, Typography } from "@betday/components/ui";
+import { useUIStateStore, useBetslipStore } from "@betday/store";
+import { dictionary } from "@betday/lib";
 
 function getInitials(name?: string | null, email?: string | null) {
   if (name) {
@@ -230,11 +227,6 @@ export function Header() {
                         <User className="h-4 w-4" /> {copy.profile}
                       </Button>
                     </Link>
-                    {/* <Link href="/profile" onClick={() => setMenuOpen(false)}>
-                      <Button variant="ghost" size="sm" className="w-full justify-start gap-2">
-                        <ClipboardList className="h-4 w-4" /> {copy.betHistory}
-                      </Button>
-                    </Link> */}
                     <Button
                       variant="outline"
                       size="sm"

@@ -1,9 +1,8 @@
 "use client";
 
-import { dictionary } from "@/lib/i18n";
-import { Box } from "@/components/ui/box";
-import { Typography } from "@/components/ui/typography";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
+import { dictionary } from "@betday/lib";
+import { Box, Typography } from "@betday/components/ui";
+import { useUIStateStore } from "@betday/store";
 
 export function Footer() {
   const locale = useUIStateStore((s) => s.locale);

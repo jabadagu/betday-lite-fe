@@ -1,5 +1,5 @@
 import { withAuth } from "next-auth/middleware";
-import { ENV } from "@/config/env";
+import { ENV } from "@betday/config/env";
 
 export default withAuth({
   secret: ENV.NEXTAUTH_SECRET,

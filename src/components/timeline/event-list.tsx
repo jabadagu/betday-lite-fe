@@ -2,12 +2,11 @@
 
 import { useMemo } from "react";
 
-import { dictionary } from "@/lib/i18n";
-import { Box } from "@/components/ui/box";
-import { Typography } from "@/components/ui/typography";
-import { EventCard } from "@/components/timeline/event-card";
-import type { MatchEvent } from "@/types/event";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
+import { dictionary } from "@betday/lib";
+import { Box, Typography } from "@betday/components/ui";
+import { EventCard } from "@betday/components/timeline";
+import type { MatchEvent } from "@betday/types";
+import { useUIStateStore } from "@betday/store";
 
 type Props = {
   events: MatchEvent[];
@@ -35,29 +34,28 @@ export function EventList({ events }: Props) {
   }, [filtered]);
 
   return (
-    <Box className='space-y-4'>
-      <Typography variant='eyebrow'>{copy.timeline}</Typography>
+    <Box className="space-y-4">
+      <Typography variant="eyebrow">{copy.timeline}</Typography>
 
       {grouped.length === 0 ? (
-        <Typography
-          variant='body2'
-          className='py-8 text-center text-tertiary'>
+        <Typography variant="body2" className="py-8 text-center text-tertiary">
           No hay eventos para este filtro.
         </Typography>
       ) : (
-        <Box className='space-y-6'>
+        <Box className="space-y-6">
           {grouped.map(([hour, hourEvents]) => (
-            <Box key={hour} className='space-y-2'>
-              <Box className='flex items-center gap-3 px-1'>
+            <Box key={hour} className="space-y-2">
+              <Box className="flex items-center gap-3 px-1">
                 <Typography
-                  variant='h3'
-                  component='span'
-                  className='text-lg font-bold text-primary'>
+                  variant="h3"
+                  component="span"
+                  className="text-lg font-bold text-primary"
+                >
                   {hour}
                 </Typography>
-                <Box className='h-px flex-1 bg-border-primary' />
+                <Box className="h-px flex-1 bg-border-primary" />
               </Box>
-              <Box className='space-y-2'>
+              <Box className="space-y-2">
                 {hourEvents.map((event, i) => (
                   <EventCard key={event.id} event={event} index={i} />
                 ))}

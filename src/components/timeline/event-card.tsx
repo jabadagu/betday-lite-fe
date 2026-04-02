@@ -2,14 +2,11 @@
 
 import { motion } from "framer-motion";
 
-import { formatMatchTime } from "@/lib/time";
-import { Box } from "@/components/ui/box";
-import { Card } from "@/components/ui/card";
-import { Typography } from "@/components/ui/typography";
-import { OddsButton } from "@/components/bets/odds-button";
-import type { MatchEvent } from "@/types/event";
-import { BetSelection } from "@/types/enums";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
+import { formatMatchTime } from "@betday/lib";
+import { Box, Card, Typography } from "@betday/components/ui";
+import { OddsButton } from "@betday/components/bets/odds-button";
+import { BetSelection, type MatchEvent } from "@betday/types";
+import { useUIStateStore } from "@betday/store";
 
 type Props = {
   event: MatchEvent;
@@ -24,56 +21,47 @@ export function EventCard({ event, index }: Props) {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.04 }}>
-      <Card className='space-y-3'>
-        <Box className='flex items-center justify-between'>
-          <Box className='flex items-center gap-2'>
-            <Typography
-              variant='eyebrow'
-              component='span'
-              className='text-[0.6rem]'>
+      transition={{ delay: index * 0.04 }}
+    >
+      <Card className="space-y-3">
+        <Box className="flex items-center justify-between">
+          <Box className="flex items-center gap-2">
+            <Typography variant="eyebrow" component="span" className="text-[0.6rem]">
               {event.league}
             </Typography>
           </Box>
-          <Typography
-            variant='body3'
-            component='span'
-            className='text-xs text-tertiary'>
+          <Typography variant="body3" component="span" className="text-xs text-tertiary">
             {time}
           </Typography>
         </Box>
 
-        <Box className='flex items-center justify-between gap-3'>
-          <Box className='flex-1 min-w-0'>
-            <Typography
-              variant='body2'
-              className='text-sm font-semibold text-primary truncate'>
+        <Box className="flex items-center justify-between gap-3">
+          <Box className="flex-1 min-w-0">
+            <Typography variant="body2" className="text-sm font-semibold text-primary truncate">
               {event.homeTeam}
             </Typography>
-            <Typography
-              variant='body2'
-              className='text-sm font-semibold text-primary truncate'>
+            <Typography variant="body2" className="text-sm font-semibold text-primary truncate">
               {event.awayTeam}
             </Typography>
           </Box>
 
-          <Box className='grid grid-cols-3 gap-1.5 shrink-0'>
+          <Box className="grid grid-cols-3 gap-1.5 shrink-0">
             <OddsButton
               event={event}
               selection={BetSelection.HOME}
-              label='1'
+              label="1"
               odd={event.odds.home}
             />
             <OddsButton
               event={event}
               selection={BetSelection.DRAW}
-              label='X'
+              label="X"
               odd={event.odds.draw}
             />
             <OddsButton
               event={event}
               selection={BetSelection.AWAY}
-              label='2'
+              label="2"
               odd={event.odds.away}
             />
           </Box>

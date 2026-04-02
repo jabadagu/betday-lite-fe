@@ -2,8 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { BetSelection } from "@/types/bet";
-import type { MatchEvent } from "@/types/event";
+import type { BetSelection, MatchEvent } from "@betday/types";
 
 type SlipItem = {
   eventId: string;
@@ -81,9 +80,7 @@ export const useBetslipStore = create<BetslipStore>()(
           return {
             selections: nextSelections,
             betslipTab:
-              nextSelections.length > 1
-                ? ("multiple" as BetslipTab)
-                : ("simple" as BetslipTab),
+              nextSelections.length > 1 ? ("multiple" as BetslipTab) : ("simple" as BetslipTab),
           };
         }),
 
@@ -93,9 +90,7 @@ export const useBetslipStore = create<BetslipStore>()(
           return {
             selections: nextSelections,
             betslipTab:
-              nextSelections.length > 1
-                ? ("multiple" as BetslipTab)
-                : ("simple" as BetslipTab),
+              nextSelections.length > 1 ? ("multiple" as BetslipTab) : ("simple" as BetslipTab),
           };
         }),
 

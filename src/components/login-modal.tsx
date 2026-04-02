@@ -6,13 +6,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { dictionary } from "@/lib/i18n";
-import { Box } from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Typography } from "@/components/ui/typography";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
+import { dictionary } from "@betday/lib";
+import { Box, Button, Card, Input, Typography } from "@betday/components/ui";
+import { useUIStateStore } from "@betday/store";
 
 const schema = z.object({
   email: z.string().email(),

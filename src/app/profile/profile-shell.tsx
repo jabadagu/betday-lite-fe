@@ -3,16 +3,10 @@
 import { useTheme } from "next-themes";
 import { Sun, Moon, Globe, Settings, Ticket } from "lucide-react";
 
-import { dictionary } from "@/lib/i18n";
-import { formatMatchTime } from "@/lib/time";
-import { Box } from "@/components/ui/box";
-import { Card } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
-import { Typography } from "@/components/ui/typography";
-import type { Bet } from "@/types/bet";
-import { Locale } from "@/types/enums";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
-import { useBetslipStore } from "@/lib/stores/betslip-store";
+import { dictionary, formatMatchTime } from "@betday/lib";
+import { Box, Card, Switch, Typography } from "@betday/components/ui";
+import { Locale, type Bet } from "@betday/types";
+import { useUIStateStore, useBetslipStore } from "@betday/store";
 
 type Props = {
   name: string;

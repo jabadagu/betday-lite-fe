@@ -1,12 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
-import { ENV } from "@/config/env";
+import { ENV } from "@betday/config/env";
 
 const supabaseUrl = ENV.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey =
-  ENV.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY ??
-  ENV.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  ENV.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY ?? ENV.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabaseServiceRoleKey = ENV.SUPABASE_SERVICE_ROLE_KEY;
-
 
 export function createSupabaseServerClient() {
   if (!supabaseUrl) {

@@ -1,4 +1,4 @@
-import { MatchEvent } from "@/types/event";
+import { MatchEvent } from "@betday/types";
 
 const today = new Date();
 const baseDate = today.toISOString().slice(0, 10);

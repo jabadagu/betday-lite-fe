@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 
-import { ENV } from "@/config/env";
+import { ENV } from "@betday/config/env";
 
 export const getServerBaseUrl = async () => {
   const h = await headers();
