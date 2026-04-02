@@ -28,6 +28,7 @@ type BetslipState = {
 type BetslipActions = {
   setStake: (value: number) => void;
   setBalance: (value: number) => void;
+  consumeBalance: (amount: number) => void;
   addSelection: (event: MatchEvent, selection: BetSelection) => void;
   removeSelection: (eventId: string) => void;
   toggleSelection: (event: MatchEvent, selection: BetSelection) => void;
@@ -58,6 +59,10 @@ export const useBetslipStore = create<BetslipStore>()(
 
       setStake: (value) => set({ stake: Math.max(0, value) }),
       setBalance: (value) => set({ balance: Math.max(0, value) }),
+      consumeBalance: (amount) =>
+        set((state) => ({
+          balance: Math.max(0, state.balance - Math.max(0, amount)),
+        })),
 
       addSelection: (event, selection) =>
         set((state) => {

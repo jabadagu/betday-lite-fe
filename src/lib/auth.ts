@@ -11,8 +11,8 @@ export const demoUsers = [
   },
   {
     id: "u-2",
-    name: "Carlos Odds",
-    email: "carlos@betday.dev",
+    name: "Jose Odds",
+    email: "jose@betday.dev",
     password: "betday123",
   },
 ] as const;

@@ -29,8 +29,8 @@ export function LoginForm() {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "ana@betday.dev",
-      password: "betday123",
+      email: "",
+      password: "",
     },
   });
 
@@ -53,61 +53,47 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Box>
-        <label
-          className='mb-1 block text-sm font-semibold text-primary'
-          htmlFor='email'>
+        <label className="mb-1 block text-sm font-semibold text-primary" htmlFor="email">
           Email
         </label>
         <Input
-          id='email'
-          type='email'
+          id="email"
+          type="email"
           variant={fieldErrors.email ? "error" : "default"}
           {...register("email")}
         />
         {fieldErrors.email && (
-          <Typography
-            variant='body3'
-            className='mt-1 text-xs text-status-error'>
+          <Typography variant="body3" className="mt-1 text-xs text-status-error">
             {fieldErrors.email.message}
           </Typography>
         )}
       </Box>
       <Box>
-        <label
-          className='mb-1 block text-sm font-semibold text-primary'
-          htmlFor='password'>
+        <label className="mb-1 block text-sm font-semibold text-primary" htmlFor="password">
           Password
         </label>
         <Input
-          id='password'
-          type='password'
+          id="password"
+          type="password"
           variant={fieldErrors.password ? "error" : "default"}
           {...register("password")}
         />
         {fieldErrors.password && (
-          <Typography
-            variant='body3'
-            className='mt-1 text-xs text-status-error'>
+          <Typography variant="body3" className="mt-1 text-xs text-status-error">
             {fieldErrors.password.message}
           </Typography>
         )}
       </Box>
 
       {error ? (
-        <Typography
-          variant='body3'
-          className='text-sm font-medium text-status-error'>
+        <Typography variant="body3" className="text-sm font-medium text-status-error">
           {error}
         </Typography>
       ) : null}
 
-      <Button
-        type='submit'
-        className='w-full'
-        disabled={isSubmitting}
-        isLoading={isSubmitting}>
+      <Button type="submit" className="w-full" disabled={isSubmitting} isLoading={isSubmitting}>
         {isSubmitting ? "Ingresando..." : "Ingresar"}
       </Button>
     </form>
