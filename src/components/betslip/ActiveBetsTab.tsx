@@ -47,7 +47,7 @@ export function ActiveBetsTab() {
 
   return (
     <Box className="flex h-full flex-col">
-      <Box className="flex-1 overflow-y-auto px-4 py-3 min-h-0 max-h-[70vh] space-y-2">
+      <Box className="flex-1 overflow-y-auto px-4 py-3 min-h-0 max-h-[80vh] space-y-2">
         {activeBets.map((bet) => (
           <ConfirmedBetCard key={bet.id} bet={bet} />
         ))}

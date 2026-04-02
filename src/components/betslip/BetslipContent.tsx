@@ -114,7 +114,7 @@ export function BetslipContent() {
   }, [session?.user?.id, betslipTab, setBetslipTab]);
 
   return (
-    <Box className="flex h-full flex-col">
+    <Box className="flex h-full flex-col overflow-hidden">
       {/* Header */}
       <Box className="flex items-center justify-between border-b border-line-primary px-4 py-3">
         <Box className="flex items-center gap-2">
@@ -246,7 +246,7 @@ export function BetslipContent() {
       </Box>
 
       {/* Footer — stake form */}
-      <Box className="border-t border-line-primary px-4 py-3 space-y-3">
+      <Box className="sticky bottom-0 z-10 shrink-0 border-t border-line-primary bg-surface-primary px-4 py-3 space-y-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)]">
         {/* Multiple mode: single global stake */}
         {isMultiple && (
           <Box>

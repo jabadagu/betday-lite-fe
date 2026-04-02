@@ -16,15 +16,17 @@ export default async function ProfilePage() {
   }
 
   const bets = await getBetsByUser(session.user.id);
+  const activeBets = bets.filter((bet) => bet.status === "PENDING");
+  const historyBets = bets.filter((bet) => bet.status !== "PENDING");
 
   return (
     <ProfileShell
       name={session.user.name ?? ""}
       email={session.user.email ?? ""}
       totalBets={bets.length}
-      activeBets={bets.filter((bet) => bet.status === "PENDING")}
+      activeBets={activeBets}
     >
-      <BetList bets={bets} />
+      <BetList bets={historyBets} />
     </ProfileShell>
   );
 }

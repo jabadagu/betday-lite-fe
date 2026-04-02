@@ -1,7 +1,17 @@
 pre-commit:
   parallel: true
   commands:
+    lint:
+      run: npm run lint
     prettier:
-      glob: "*.{js,jsx,ts,tsx,mjs,cjs,json,css,md,yml,yaml}"
+      glob: "**/*.{js,jsx,ts,tsx,mjs,cjs,json,css,md,yml,yaml}"
       run: npx prettier --write {staged_files}
       stage_fixed: true
+
+pre-push:
+  parallel: false
+  commands:
+    test:
+      run: npm run test
+    build:
+      run: npm run build

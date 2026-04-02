@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Ticket } from "lucide-react";
+import { Ticket, X } from "lucide-react";
 import { dictionary } from "@/lib/i18n";
 import { Box } from "@/components/ui/box";
 import { Card } from "@/components/ui/card";
@@ -42,19 +42,20 @@ function BetslipMain() {
 /* Desktop sidebar */
 export function BetslipSidebar() {
   return (
-    <Card
-      padding="none"
-      className="sticky top-[65px] hidden h-[calc(100vh-80px)] w-[320px] shrink-0 flex-col overflow-hidden lg:flex"
-    >
-      <BetslipMain />
-    </Card>
+    <Box className="sticky top-[65px] hidden h-[calc(100vh-80px)] w-[320px] shrink-0 self-start lg:flex">
+      <Card padding="none" className="flex h-full w-full flex-col overflow-hidden">
+        <BetslipMain />
+      </Card>
+    </Box>
   );
 }
 
 /* Mobile bottom‑sheet / modal */
 export function BetslipMobile() {
+  const locale = useUIStateStore((s) => s.locale);
   const mobileSlipOpen = useUIStateStore((s) => s.mobileSlipOpen);
   const openMobileSlip = useUIStateStore((s) => s.openMobileSlip);
+  const copy = dictionary[locale];
 
   return (
     <AnimatePresence>
@@ -75,13 +76,18 @@ export function BetslipMobile() {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed inset-x-0 bottom-0 z-50 max-h-[90vh] rounded-t-2xl border-t border-line-primary bg-surface-primary shadow-xl lg:hidden"
+            className="fixed inset-0 z-50 flex flex-col overflow-hidden border-t border-line-primary bg-surface-primary shadow-xl lg:hidden"
           >
-            {/* Drag handle */}
-            <Box className="flex justify-center py-2">
-              <Box className="h-1 w-10 rounded-full bg-border-secondary" />
-            </Box>
-            <Box className="max-h-[calc(90vh-16px)] overflow-hidden flex flex-col">
+            <button
+              type="button"
+              onClick={() => openMobileSlip(false)}
+              aria-label={copy.close}
+              className="absolute right-2 top-2 z-20 flex h-6 w-6 items-center justify-center rounded-full border border-line-primary bg-surface-primary text-primary shadow-sm"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <Box className="flex min-h-0 flex-1 flex-col overflow-hidden pt-8">
               <BetslipMain />
             </Box>
           </motion.div>
