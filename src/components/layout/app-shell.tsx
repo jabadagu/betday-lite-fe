@@ -8,15 +8,17 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { BetslipMobile, BetslipFab } from "@/components/betslip";
 import { LoginModal } from "@/components/login-modal";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isLogin = pathname === "/login";
 
   return (
-    <Box className='flex min-h-screen flex-col bg-surface-page'>
+    <Box className="flex min-h-screen flex-col bg-surface-page">
       <Header />
-      <Box className='flex-1'>{children}</Box>
+      <Box className="flex-1">{children}</Box>
       <Footer />
 
       {/* Global overlays */}
@@ -24,6 +26,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <BetslipMobile />
       <LoginModal />
       <Toast />
+      {/* vercel */}
+      <Analytics />
+      <SpeedInsights />
     </Box>
   );
 }

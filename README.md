@@ -83,6 +83,8 @@ npm run dev
 
 ## Credenciales demo
 
+Las credenciales no se autocompletan en el formulario de login; ingresalas manualmente.
+
 - `ana@betday.dev / betday123`
 - `carlos@betday.dev / betday123`
 

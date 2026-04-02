@@ -32,8 +32,10 @@ export function BetslipContent() {
   const setBetslipTab = useBetslipStore((s) => s.setBetslipTab);
   const removeSelection = useBetslipStore((s) => s.removeSelection);
   const clearSelections = useBetslipStore((s) => s.clearSelections);
+  const consumeBalance = useBetslipStore((s) => s.consumeBalance);
 
   const isMultiple = betslipTab === "multiple";
+  const isLoggedIn = Boolean(session?.user?.id);
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -53,6 +55,7 @@ export function BetslipContent() {
       return true;
     },
     onSuccess: async () => {
+      consumeBalance(totalStake);
       clearSelections();
       await queryClient.invalidateQueries({
         queryKey: ["bets", session?.user?.id],
@@ -96,11 +99,13 @@ export function BetslipContent() {
   const totalOdds = selections.reduce((acc, item) => acc + item.odd, 0);
   const multipliedOdds = selections.reduce((acc, item) => acc * item.odd, 1);
   const totalSimpleStake = selections.reduce((sum, item) => sum + item.stake, 0);
+  const totalStake = isMultiple ? stake : totalSimpleStake;
   const potentialWin = isMultiple
     ? stake * (selections.length >= 2 ? multipliedOdds : 0)
     : selections.reduce((sum, item) => sum + item.stake * item.odd, 0);
   const copy = dictionary[locale];
-  const insufficientBalance = isMultiple ? stake > balance : totalSimpleStake > balance;
+  const insufficientBalance =
+    isLoggedIn && (isMultiple ? stake > balance : totalSimpleStake > balance);
 
   useEffect(() => {
     if (!session?.user?.id && betslipTab === "active") {
