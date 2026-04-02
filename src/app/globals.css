@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/* ─── Design System: Semantic CSS Variables ─── */
+
+:root {
+  /* Surface */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f5f7;
+  --bg-tertiary: #e9ebef;
+  --bg-page: #f0f2f5;
+  --bg-inverse: #1a1d23;
+
+  /* Brand */
+  --brand-primary: #1b8a4a;
+  --brand-primary-hover: #157a3f;
+  --brand-primary-soft: #e6f5ed;
+  --brand-secondary: #0c6fc4;
+  --brand-secondary-hover: #0a5ea8;
+  --brand-secondary-soft: #e0f0ff;
+  --brand-accent: #f59e0b;
+  --brand-accent-hover: #d97706;
+  --brand-accent-soft: #fef3c7;
+
+  /* Text */
+  --text-primary: #1a1d23;
+  --text-secondary: #4b5563;
+  --text-tertiary: #9ca3af;
+  --text-inverse: #ffffff;
+  --text-brand: #1b8a4a;
+  --text-link: #0c6fc4;
+
+  /* Border */
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --border-active: #1b8a4a;
+  --border-focus: #0c6fc4;
+
+  /* Status */
+  --status-success: #16a34a;
+  --status-success-soft: #dcfce7;
+  --status-error: #dc2626;
+  --status-error-soft: #fee2e2;
+  --status-warning: #f59e0b;
+  --status-warning-soft: #fef3c7;
+
+  /* Odds Button */
+  --odds-bg: #f0f2f5;
+  --odds-bg-hover: #e2e5ea;
+  --odds-bg-selected: #1b8a4a;
+  --odds-text: #1a1d23;
+  --odds-text-selected: #ffffff;
+  --odds-border: #d1d5db;
+  --odds-border-selected: #1b8a4a;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.06);
+
+  /* Overlay */
+  --overlay: rgb(0 0 0 / 0.5);
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-full: 9999px;
+}
+
+.dark {
+  --bg-primary: #1e2028;
+  --bg-secondary: #262830;
+  --bg-tertiary: #2f3139;
+  --bg-page: #14161b;
+  --bg-inverse: #ffffff;
+
+  --brand-primary: #34d374;
+  --brand-primary-hover: #2abb65;
+  --brand-primary-soft: #1a3a28;
+  --brand-secondary: #60a5fa;
+  --brand-secondary-hover: #3b82f6;
+  --brand-secondary-soft: #1e2d45;
+  --brand-accent: #fbbf24;
+  --brand-accent-hover: #f59e0b;
+  --brand-accent-soft: #3d3214;
+
+  --text-primary: #f0f2f5;
+  --text-secondary: #9ca3af;
+  --text-tertiary: #6b7280;
+  --text-inverse: #1a1d23;
+  --text-brand: #34d374;
+  --text-link: #60a5fa;
+
+  --border-primary: #2f3139;
+  --border-secondary: #3f4149;
+  --border-active: #34d374;
+  --border-focus: #60a5fa;
+
+  --status-success: #34d374;
+  --status-success-soft: #1a3a28;
+  --status-error: #f87171;
+  --status-error-soft: #3a1c1c;
+  --status-warning: #fbbf24;
+  --status-warning-soft: #3d3214;
+
+  --odds-bg: #262830;
+  --odds-bg-hover: #2f3139;
+  --odds-bg-selected: #34d374;
+  --odds-text: #f0f2f5;
+  --odds-text-selected: #1a1d23;
+  --odds-border: #3f4149;
+  --odds-border-selected: #34d374;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+
+  --overlay: rgb(0 0 0 / 0.7);
+}
+
+@theme inline {
+  /* Surface aliases (e.g. bg-surface-primary) */
+  --color-surface-primary: var(--bg-primary);
+  --color-surface-secondary: var(--bg-secondary);
+  --color-surface-page: var(--bg-page);
+
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-hover: var(--brand-primary-hover);
+  --color-brand-primary-soft: var(--brand-primary-soft);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-secondary-hover: var(--brand-secondary-hover);
+  --color-brand-secondary-soft: var(--brand-secondary-soft);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-hover: var(--brand-accent-hover);
+  --color-brand-accent-soft: var(--brand-accent-soft);
+
+  /* Short text color aliases (e.g. text-primary) */
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-tertiary: var(--text-tertiary);
+  --color-inverse: var(--text-inverse);
+  --color-brand: var(--text-brand);
+  --color-link: var(--text-link);
+
+  /* Border aliases (e.g. border-line-primary) */
+  --color-line-primary: var(--border-primary);
+  --color-line-secondary: var(--border-secondary);
+  --color-line-active: var(--border-active);
+
+  --color-status-success: var(--status-success);
+  --color-status-success-soft: var(--status-success-soft);
+  --color-status-error: var(--status-error);
+  --color-status-error-soft: var(--status-error-soft);
+  --color-status-warning: var(--status-warning);
+  --color-status-warning-soft: var(--status-warning-soft);
+
+  --color-odds-bg: var(--odds-bg);
+  --color-odds-bg-hover: var(--odds-bg-hover);
+  --color-odds-bg-selected: var(--odds-bg-selected);
+  --color-odds-text: var(--odds-text);
+  --color-odds-text-selected: var(--odds-text-selected);
+  --color-odds-border: var(--odds-border);
+  --color-odds-border-selected: var(--odds-border-selected);
+
+  --color-overlay: var(--overlay);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* Radius aliases (e.g. rounded-radius-lg) */
+  --radius-radius-sm: var(--radius-sm);
+  --radius-radius-md: var(--radius-md);
+  --radius-radius-lg: var(--radius-lg);
+  --radius-radius-xl: var(--radius-xl);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: var(--radius-full);
+}
+
+/* Carousel scroll */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
