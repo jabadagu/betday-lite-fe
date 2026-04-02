@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { Locale } from "@betday/types";
 
-import { formatMatchTime } from "./time";
+import { formatMatchTime } from "./dates";
 
 describe("formatMatchTime", () => {
   it.each([
