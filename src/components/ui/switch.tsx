@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/cn";
+import { cn } from "@betday/lib";
 import { ReactNode } from "react";
 
 type SwitchProps = {

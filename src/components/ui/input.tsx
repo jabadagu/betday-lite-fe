@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/cn";
+import { cn } from "@betday/lib";
 
 const inputVariants = cva(
   "w-full rounded-radius-lg border bg-surface-primary font-medium text-primary transition-all duration-200 placeholder:text-tertiary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 disabled:opacity-50 disabled:cursor-not-allowed",

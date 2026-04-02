@@ -2,8 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Locale } from "@/types/enums";
-import { Locale as LocaleEnum } from "@/types/enums";
+import { Locale as LocaleEnum, type Locale } from "@betday/types";
 
 type NoticeType = {
   message: string;

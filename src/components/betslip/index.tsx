@@ -4,16 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Ticket, X } from "lucide-react";
-import { dictionary } from "@/lib/i18n";
-import { Box } from "@/components/ui/box";
-import { Card } from "@/components/ui/card";
-import { Typography } from "@/components/ui/typography";
+import { dictionary } from "@betday/lib";
+import { Box, Card, Typography } from "@betday/components/ui";
 import { BetslipTabBar } from "./BetslipTabBar";
 import { BetslipContent } from "./BetslipContent";
 import { ActiveBetsTab } from "./ActiveBetsTab";
-import { useBetslipStore } from "@/lib/stores/betslip-store";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
-import { fetchBets } from "@/services/betslip-api.service";
+import { useBetslipStore, useUIStateStore } from "@betday/store";
+import { fetchBets } from "@betday/services/betslip-api.service";
 
 /* ─── Main betslip wrapper ─── */
 function BetslipMain() {

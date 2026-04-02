@@ -1,11 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/cn";
-import { Typography } from "@/components/ui/typography";
-import type { BetSelection } from "@/types/bet";
-import type { MatchEvent } from "@/types/event";
-import { useBetslipStore } from "@/lib/stores/betslip-store";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
+import { cn } from "@betday/lib";
+import { Typography } from "@betday/components/ui";
+import type { BetSelection, MatchEvent } from "@betday/types";
+import { useBetslipStore, useUIStateStore } from "@betday/store";
 
 type Props = {
   event: MatchEvent;
@@ -18,12 +16,8 @@ export function OddsButton({ event, selection, label, odd }: Props) {
   const toggleSelection = useBetslipStore((s) => s.toggleSelection);
   const betslipTab = useBetslipStore((s) => s.betslipTab);
   const selections = useBetslipStore((s) => s.selections);
-  const hasShownModalInSession = useUIStateStore(
-    (s) => s.hasShownModalInSession,
-  );
-  const setHasShownModalInSession = useUIStateStore(
-    (s) => s.setHasShownModalInSession,
-  );
+  const hasShownModalInSession = useUIStateStore((s) => s.hasShownModalInSession);
+  const setHasShownModalInSession = useUIStateStore((s) => s.setHasShownModalInSession);
   const openMobileSlip = useUIStateStore((s) => s.openMobileSlip);
 
   const selected = selections.some(
@@ -47,30 +41,30 @@ export function OddsButton({ event, selection, label, odd }: Props) {
 
   return (
     <button
-      type='button'
+      type="button"
       onClick={handleClick}
       className={cn(
         "flex flex-col items-center gap-0.5 rounded-radius-lg border px-2 py-2 text-sm font-semibold transition-all duration-200",
         selected
           ? "border-odds-border-selected bg-odds-bg-selected text-odds-text-selected shadow-sm"
           : "border-odds-border bg-odds-bg text-odds-text hover:bg-odds-bg-hover hover:border-line-secondary",
-      )}>
+      )}
+    >
       <Typography
-        variant='body3'
-        component='span'
+        variant="body3"
+        component="span"
         className={cn(
           "text-[0.6rem] font-bold",
           selected ? "text-odds-text-selected opacity-90" : "opacity-70",
-        )}>
+        )}
+      >
         {label}
       </Typography>
       <Typography
-        variant='body2'
-        component='span'
-        className={cn(
-          "text-sm font-bold",
-          selected ? "text-odds-text-selected" : "",
-        )}>
+        variant="body2"
+        component="span"
+        className={cn("text-sm font-bold", selected ? "text-odds-text-selected" : "")}
+      >
         {odd.toFixed(2)}
       </Typography>
     </button>

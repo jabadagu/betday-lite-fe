@@ -1,12 +1,22 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import { BetList } from "@/components/bet-list";
-import { authOptions } from "@/lib/auth";
-import { getBetsByUser } from "@/services/bets.service";
+import { BetList } from "@betday/components/bet-list";
+import { authOptions } from "@betday/lib/auth";
+import { getBetsByUser } from "@betday/services/bets.service";
 import { ProfileShell } from "./profile-shell";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Perfil | BetDay",
+  description: "Gestiona tu perfil y revisa tu historial de apuestas en BetDay.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);

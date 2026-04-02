@@ -2,14 +2,12 @@
 
 import { usePathname } from "next/navigation";
 
-import { Box } from "@/components/ui/box";
-import { Toast } from "@/components/ui/toast";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { BetslipMobile, BetslipFab } from "@/components/betslip";
-import { LoginModal } from "@/components/login-modal";
+import { Box, Toast } from "@betday/components/ui";
+import { BetslipMobile, BetslipFab } from "@betday/components/betslip";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Header, Footer } from "@betday/components/layout";
+import { LoginModal } from "@betday/components/login-modal";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

@@ -1,11 +1,9 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { dictionary } from "@/lib/i18n";
-import type { BetslipTab } from "@/lib/stores/betslip-store";
-import { Box } from "@/components/ui/box";
-import { useUIStateStore } from "@/lib/stores/ui-state-store";
-import { useBetslipStore } from "@/lib/stores/betslip-store";
+import { dictionary } from "@betday/lib";
+import { Box } from "@betday/components/ui";
+import { type BetslipTab, useUIStateStore, useBetslipStore } from "@betday/store";
 
 interface TabConfig {
   key: BetslipTab;
@@ -39,7 +37,7 @@ export function BetslipTabBar({ activeBetsCount = 0 }: BetslipTabBarProps) {
   }
 
   return (
-    <Box className='flex border-b border-line-primary'>
+    <Box className="flex border-b border-line-primary">
       {tabs.map((tab) => (
         <button
           key={tab.key}
@@ -48,10 +46,11 @@ export function BetslipTabBar({ activeBetsCount = 0 }: BetslipTabBarProps) {
             betslipTab === tab.key
               ? "border-b-2 border-brand-primary text-brand"
               : "text-tertiary hover:text-secondary"
-          }`}>
+          }`}
+        >
           {tab.label}
           {tab.badge ? (
-            <span className='ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-status-warning text-[0.55rem] font-bold text-white px-1'>
+            <span className="ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-status-warning text-[0.55rem] font-bold text-white px-1">
               {tab.badge}
             </span>
           ) : null}

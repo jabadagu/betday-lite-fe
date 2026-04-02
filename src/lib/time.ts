@@ -1,4 +1,4 @@
-import type { Locale } from "@/lib/i18n";
+import type { Locale } from "@betday/lib";
 
 export function formatMatchTime(startTime: string, locale: Locale) {
   return new Intl.DateTimeFormat(locale === "es" ? "es-ES" : "en-US", {
