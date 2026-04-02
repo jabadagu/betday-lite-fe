@@ -37,7 +37,7 @@ function AvatarMenu() {
     <Box className="relative" ref={ref}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-primary text-xs font-bold text-inverse transition hover:opacity-90"
+        className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-primary text-xs font-bold text-inverse transition hover:opacity-90 cursor-pointer"
       >
         {initials}
       </button>
@@ -68,16 +68,6 @@ function AvatarMenu() {
                   <User className="h-4 w-4" />
                 </span>
                 {copy.profile}
-              </Link>
-              <Link
-                href="/profile"
-                onClick={() => setOpen(false)}
-                className="flex w-full items-center gap-2 px-3 py-2 text-sm text-secondary transition hover:bg-surface-secondary"
-              >
-                <span className="text-base">
-                  <ClipboardList className="h-4 w-4" />
-                </span>
-                {copy.betHistory}
               </Link>
               <button
                 onClick={() => {
@@ -172,28 +162,36 @@ export function Header() {
             </Typography>
           )}
 
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex h-8 w-8 flex-col items-center justify-center gap-1 rounded-lg text-primary transition hover:bg-surface-secondary"
-            aria-label={copy.menu}
-          >
-            <span
-              className={`block h-0.5 w-4 rounded-full bg-current transition-transform ${menuOpen ? "translate-y-[3px] rotate-45" : ""}`}
-            />
-            <span
-              className={`block h-0.5 w-4 rounded-full bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block h-0.5 w-4 rounded-full bg-current transition-transform ${menuOpen ? "-translate-y-[3px] -rotate-45" : ""}`}
-            />
-          </button>
+          {/* Mobile auth action */}
+          {session?.user ? (
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex h-8 w-8 flex-col items-center justify-center gap-1 rounded-lg text-primary transition hover:bg-surface-secondary"
+              aria-label={copy.menu}
+            >
+              <span
+                className={`block h-0.5 w-4 rounded-full bg-current transition-transform ${menuOpen ? "translate-y-[3px] rotate-45" : ""}`}
+              />
+              <span
+                className={`block h-0.5 w-4 rounded-full bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`block h-0.5 w-4 rounded-full bg-current transition-transform ${menuOpen ? "-translate-y-[3px] -rotate-45" : ""}`}
+              />
+            </button>
+          ) : (
+            <Link href="/login">
+              <Button variant="primary" size="sm" rounded="full">
+                {copy.login}
+              </Button>
+            </Link>
+          )}
         </Box>
       </Box>
 
       {/* Mobile floating menu overlay */}
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen && session?.user && (
           <>
             {/* Click-away backdrop */}
             <motion.div
@@ -211,17 +209,6 @@ export function Header() {
               className="absolute right-4 top-full z-50 mt-1 w-56 overflow-hidden rounded-radius-lg border border-line-primary bg-surface-primary shadow-lg md:hidden"
             >
               <Box className="flex flex-col gap-2 px-4 py-3">
-                {/* Balance */}
-                {session?.user && (
-                  <Typography
-                    variant="body3"
-                    component="span"
-                    className="text-xs font-semibold text-secondary"
-                  >
-                    {copy.balance}: S/ {balance.toFixed(2)}
-                  </Typography>
-                )}
-
                 {/* Auth */}
                 {session?.user ? (
                   <Box className="flex flex-col gap-2">
@@ -229,20 +216,25 @@ export function Header() {
                       <Box className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-primary text-[0.6rem] font-bold text-inverse">
                         {getInitials(session.user.name, session.user.email)}
                       </Box>
-                      <Typography variant="body3" className="text-sm text-primary truncate">
-                        {session.user.name}
-                      </Typography>
+                      <Box>
+                        <Typography variant="body3" className="text-sm text-primary truncate">
+                          {session.user.name}
+                        </Typography>
+                        <Typography variant="body3" className="text-xs text-tertiary truncate">
+                          {session.user.email}
+                        </Typography>
+                      </Box>
                     </Box>
                     <Link href="/profile" onClick={() => setMenuOpen(false)}>
                       <Button variant="ghost" size="sm" className="w-full justify-start gap-2">
                         <User className="h-4 w-4" /> {copy.profile}
                       </Button>
                     </Link>
-                    <Link href="/profile" onClick={() => setMenuOpen(false)}>
+                    {/* <Link href="/profile" onClick={() => setMenuOpen(false)}>
                       <Button variant="ghost" size="sm" className="w-full justify-start gap-2">
                         <ClipboardList className="h-4 w-4" /> {copy.betHistory}
                       </Button>
-                    </Link>
+                    </Link> */}
                     <Button
                       variant="outline"
                       size="sm"
