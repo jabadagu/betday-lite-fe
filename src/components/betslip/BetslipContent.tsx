@@ -98,6 +98,7 @@ export function BetslipContent() {
     ? stake * (selections.length >= 2 ? multipliedOdds : 0)
     : selections.reduce((sum, item) => sum + item.stake * item.odd, 0);
   const copy = dictionary[locale];
+  const invalidMultipleStake = isMultiple && stake < 1;
   const insufficientBalance =
     isLoggedIn && (isMultiple ? stake > balance : totalSimpleStake > balance);
 
@@ -253,8 +254,13 @@ export function BetslipContent() {
               value={stake || ""}
               onChange={(e) => setStake(e.target.value === "" ? 0 : Number(e.target.value))}
               inputSize="sm"
-              variant={insufficientBalance ? "error" : "default"}
+              variant={invalidMultipleStake || insufficientBalance ? "error" : "default"}
             />
+            {invalidMultipleStake ? (
+              <Typography variant="body3" className="mt-1 text-xs text-status-error">
+                {copy.minStake}
+              </Typography>
+            ) : null}
             {insufficientBalance && (
               <Typography variant="body3" className="mt-1 text-xs text-status-error">
                 {copy.insufficientBalance}
@@ -335,6 +341,7 @@ export function BetslipContent() {
             disabled={
               mutation.isPending ||
               selections.length === 0 ||
+              invalidMultipleStake ||
               insufficientBalance ||
               (isMultiple && selections.length < 2)
             }

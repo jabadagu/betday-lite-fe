@@ -87,7 +87,8 @@ Ingresa manualmente en `/login`:
 - `npm run start`: sirve el build de produccion.
 - `npm run lint`: ejecuta ESLint.
 - `npm run typecheck`: ejecuta TypeScript sin emitir.
-- `npm run test`: actualmente corre `typecheck`.
+- `npm run test`: ejecuta las pruebas unitarias con Vitest.
+- `npm run test:watch`: ejecuta Vitest en modo observacion.
 - `npm run format`: formatea codigo con Prettier.
 - `npm run format:check`: valida formato sin escribir cambios.
 
