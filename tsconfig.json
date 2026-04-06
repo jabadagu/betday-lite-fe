@@ -24,6 +24,8 @@
       "@betday/lib/*": ["./src/lib/*"],
       "@betday/services": ["./src/services/index.ts"],
       "@betday/services/*": ["./src/services/*"],
+      "@betday/hooks": ["./src/hooks/index.ts"],
+      "@betday/hooks/*": ["./src/hooks/*"],
       "@betday/types": ["./src/types/index.ts"],
       "@betday/types/*": ["./src/types/*"],
       "@betday/store": ["./src/store/index.ts"],
